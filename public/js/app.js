@@ -1,5 +1,3 @@
-console.log("frontend running");
-
 const weatherForm = document.getElementById("weatherForm");
 const searchInput = document.getElementById("searchInput");
 const msg1 = document.getElementById("msg1");
