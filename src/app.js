@@ -3,6 +3,7 @@ const express = require("express");
 const ejs = require("ejs");
 const forecast = require("./utils/forecast");
 const geocode = require("./utils/geocode");
+const port = process.env.PORT || 3000;
 
 //path definitions for views , partials and public
 const publicDirPath = path.join(__dirname, "../public");
@@ -100,6 +101,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("server is up and running.");
+app.listen(port, () => {
+  console.log("server is up and running on port " + port);
 });
