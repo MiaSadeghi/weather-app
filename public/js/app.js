@@ -11,12 +11,15 @@ const formSubmitHandler = (e) => {
   axios
     .get("/weather?address=" + location, { headers: { myToken: "123" } })
     .then((response) => {
+      searchInput.value = "";
+
       const data = response.data;
       if (data.error) {
         msg1.textContent = data.error;
       } else {
         msg1.textContent = data.location;
-        msg2.textContent = data.temperature;
+        msg2.textContent =
+          "Current temperature is: " + data.temperature + " degrees Celcius.";
       }
       console.log(data);
     })
