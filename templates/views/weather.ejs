@@ -13,33 +13,59 @@
 <body>
     <%- include("header") %>
 
-        <div>
+        <% if (locals.error) { %>
+            <div class="centered">
+                <%= error %>
+            </div>
 
-            <% if (locals.error) { %>
+            <% } else { %>
+                <div class="centered">
+                    <div id="weatherDataCard">
+                        <div class="mainWeatherInfo">
+                            <div class="mainInfo_header">
+                                <h3 class="location">
+                                    <%= location %>
+                                </h3>
+                                <span class="time">
+                                    Local time: <%= time %>
+                                </span>
+                            </div>
+                            <div class="icon_temp_container">
+                                <img src=<%=weather_icons[0] %> >
+                                <span class="temperature">
+                                    <%= temperature %> °C
+                                </span>
+                            </div>
+                            <div class="weatherDescription">
+                                <%= weather_descriptions[0] %>
+                            </div>
+                        </div>
+                        <div class="weatherDetails">
+                            <div class="details_row">
+                                <span>Feels Like</span>
+                                <span>
+                                    <%= feelslike %>
+                                </span>
+                            </div>
+                            <div class="details_row">
+                                <span>Wind</span>
+                                <span>
+                                    <%= wind_dir %>
 
-                <p>
-                    <%= error %>
-                </p>
-                <%} else { %>
-                    <h2>
-                        <%= weather_descriptions %>
-                    </h2>
-                    <div class="temperature">
-                        <%= temperature %> degrees celcius
+                                        <%=wind_speed %> km/h
+                                </span>
+                            </div>
+                            <div class="details_row">
+                                <span>UV Index</span>
+                                <span>
+                                    <%= uv_index %>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="feelsLike">
-                        feels like <%= feelslike %>
-                    </div>
-                    <div class="location">
-                        <%= location %>
-                    </div>
-
-                    <% } %>
-
-
-
-        </div>
-        <%- include("footer") %>
+                </div>
+                <% } %>
+                    <%- include("footer") %>
 
 </body>
 

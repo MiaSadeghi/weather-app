@@ -7,25 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"
             integrity="sha512-L4lHq2JI/GoKsERT8KYa72iCwfSrKYWEyaBxzJeeITM9Lub5vlTj8tufqYk056exhjo2QDEipJrg6zen/DDtoQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 </head>
 
 <body>
 
     <%- include("header") %>
-        <form id="weatherForm">
-            <input type="text" placeholder="Location" id="searchInput">
+        <form id="weatherForm" action="/weather" method="get">
+            <input type="text" placeholder="Location" id="searchInput" name="address">
             <button type="submit">Get Forecast</button>
         </form>
-        <div class="centered">
-            <p id="msg1"></p>
-            <p id="msg2"></p>
-        </div>
+
+
+
         <%- include("footer") %>
 
-            <script src="/js/app.js"></script>
+            <!-- <script src="/js/app.js"></script> -->
 </body>
 
 </html>

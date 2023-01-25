@@ -11,9 +11,9 @@ h1 {
   margin: 0;
 }
 
-img {
+/* img {
   width: 400px;
-}
+} */
 
 .navbar {
   display: flex;
@@ -94,9 +94,48 @@ form input:focus {
   transform: translate(-50%, -50%);
 }
 
-#msg1 {
-  font-size: 2rem;
+#weatherDataCard {
+  display: flex;
+  justify-content: space-between;
 }
-#msg2 {
+
+#weatherDataCard h3 {
   font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+.mainWeatherInfo {
+  flex-basis: 0;
+  flex-grow: 1;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.icon_temp_container {
+  display: flex;
+  align-items: flex-end;
+}
+.weatherDescription {
+  color: gray;
+}
+
+.temperature {
+  font-size: 3rem;
+}
+
+.weatherDetails {
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.details_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
 }

@@ -15,7 +15,7 @@ const forecast = ({ lat, lon }, callback) => {
             apiResponse.error.info,
         );
       } else {
-        callback(apiResponse.current);
+        callback(apiResponse);
       }
     })
     .catch((e) => {

@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+const moment = require("moment");
 const ejs = require("ejs");
 const forecast = require("./utils/forecast");
 const geocode = require("./utils/geocode");
@@ -8,7 +9,6 @@ const port = process.env.PORT || 3000;
 //path definitions for views , partials and public
 const publicDirPath = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
-const partialsPath = path.join(__dirname, "../templates/partials");
 //initializing express
 const app = express();
 
@@ -21,24 +21,13 @@ app.use(express.static(publicDirPath));
 
 app.get("", (req, res) => {
   res.render("index", {
-    name: "kimia",
     title: "Weather App",
   });
 });
 
-// app.get("/api/search", (req, res) => {
-//   geocode(req.query.address, ({ lat, lon } = {}) => {
-//     forecast({ lat, lon }, (data) => {
-//       res.json(data);
-//     });
-//   });
-// });
-
 app.get("/about", (req, res) => {
   res.render("about", {
-    name: "kimia",
     title: "About Me",
-    chartdata: { x: 1, y: 2 },
   });
 });
 
@@ -46,7 +35,6 @@ app.get("/help", (req, res) => {
   res.render("help", {
     helpMsg: "this is the help message.",
     title: "Help",
-    name: "Kimia",
   });
 });
 
@@ -54,50 +42,43 @@ app.get("/help/*", (req, res) => {
   res.render("404", {
     errorMsg: "help article not found",
     title: "Help",
-    name: "Kimia",
   });
 });
 
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
-    return res.json({ error: "please enter a location" });
+    return res.render("weather", {
+      error: "please enter a location",
+      title: "Weather",
+      name: "Kimia",
+    });
   }
-
-  console.log(req.header("myToken"));
 
   geocode(req.query.address, ({ lat, lon, location } = {}) => {
     forecast({ lat, lon }, (data) => {
+      const current = data.current;
       console.log({ data });
-      if (typeof data === "string") {
-        console.log("here");
-        console.log(data);
-        return res.json({
-          name: "Kimia",
-          title: "weather",
-          error: data,
+      if (typeof current === "string") {
+        return res.render("weather", {
+          title: "Weather",
+          error: current,
         });
       }
-      return res.json({
-        name: "Kimia",
-        title: "weather",
+      const time = moment(data.location.localtime).format("h:mm a");
+      return res.render("weather", {
+        title: "Weather",
         location,
-        ...data,
-        // error: "",
+        time: time,
+        ...current,
       });
     });
   });
 });
 
-app.get("/products", (req, res) => {
-  console.log(req.query);
-  res.send({ products: [] });
-});
-
 app.get("*", (req, res) => {
   res.render("404", {
     errorMsg: "page not found",
-    title: "Help",
-    name: "Kimia",
+    title: "Weather",
   });
 });
 
